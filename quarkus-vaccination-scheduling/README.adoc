@@ -68,3 +68,29 @@ $ ./target/*-runner
 == More information
 
 Visit https://www.optaplanner.org/[www.optaplanner.org].
+
+== jbride
+
+. build image
++
+-----
+$ mvn clean package \
+      -D skipTests \
+      -Dquarkus.container-image.build=true \
+      -D quarkus.container-image.group=quay.io/jbride \
+      -D quarkus.container-image.tag=jbride-363f9f4
+-----
+
+. push image
++
+-----
+$ docker push quay.io/jbride/optaplanner-quarkus-vaccination-scheduler-quickstart:jbride-363f9f4
+-----
+
+. Create IS
++
+-----
+$ oc tag --source=docker \
+         quay.io/jbride/optaplanner-quarkus-vaccination-scheduler-quickstart \
+         p-vaccination:jbride-363f9f4
+-----
